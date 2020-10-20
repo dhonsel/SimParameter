@@ -48,5 +48,5 @@ output/
 # include run configurations
 !.idea/runConfigurations/
 
-# inclide code style
+# include code style
 !.idea/codeStyles/

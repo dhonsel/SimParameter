@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="SimParameter_example" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="de.ugoe.cs.tcs.simparameter.SimParameter" />
+    <module name="SimParameter" />
+    <option name="PROGRAM_PARAMETERS" value="-c deltaspike.config -o output -H host -p port -DB dbname -U user -P passwd -a admindb -d INFO" />
+    <option name="VM_PARAMETERS" value="-Xmx4G" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
