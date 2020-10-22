@@ -102,7 +102,7 @@ public class Common {
         type.append(simpleTypeName(typeName));
         return j;
       } else {
-        typeName += name.charAt(j);
+        typeName = typeName + name.charAt(j);
       }
     }
     return start + 1;
@@ -151,7 +151,7 @@ public class Common {
    * @return The reformatted type name with a '$' as separator for nested types.
    */
   public static String formatNestedTypeName(String name, int level) {
-    String parts[] = name.split("\\.");
+    String[] parts = name.split("\\.");
     StringBuilder formattedName = new StringBuilder();
     for (int i = 0; i < parts.length; i++) {
       formattedName.append(parts[i]);
