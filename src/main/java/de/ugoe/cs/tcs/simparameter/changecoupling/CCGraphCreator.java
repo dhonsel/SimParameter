@@ -21,14 +21,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class CCGraphCreator {
-  private Logger logger = (Logger) LoggerFactory.getLogger("de.ugoe.cs.tcs.simparameter.changecoupling.CCGraphCreator");
-  private Graph<CCFile, CCEdge> graph;
+  private final Logger logger = (Logger) LoggerFactory.getLogger("de.ugoe.cs.tcs.simparameter.changecoupling.CCGraphCreator");
+  private final Graph<CCFile, CCEdge> graph;
   private static final int MAX_COMMIT_SIZE = 25;
-  private Map<ObjectId, ObjectId> renamedFiles;
-  private Map<String, MutableInt> packages;
-  private List<ExportPackage> exportPackages;
-  private DatabaseContext ctx;
-  private Map<String, Number> projectSize;
+  private final Map<ObjectId, ObjectId> renamedFiles;
+  private final Map<String, MutableInt> packages;
+  private final List<ExportPackage> exportPackages;
+  private final DatabaseContext ctx;
+  private final Map<String, Number> projectSize;
 
 
   public CCGraphCreator() {
@@ -197,8 +197,7 @@ public class CCGraphCreator {
     if (classOfFile != null) {
       var splitName = classOfFile.getLongName().split("\\.");
       StringBuilder pName = new StringBuilder();
-      int packageLength = splitName.length - 1 <= Parameter.getInstance().getMaxPackageSplitName()
-          ? splitName.length - 1 : Parameter.getInstance().getMaxPackageSplitName();
+      int packageLength = Math.min(splitName.length - 1, Parameter.getInstance().getMaxPackageSplitName());
       for (int i = 0; i < packageLength; i++) {
         pName.append(splitName[i]);
         if (i < packageLength - 1) {
@@ -249,7 +248,7 @@ public class CCGraphCreator {
 
   public void printFileInfo() {
     graph.vertexSet().stream()
-        .sorted((f1, f2) -> Integer.compare(f1.getNumberOfChanges(), f2.getNumberOfChanges()))
+        .sorted(Comparator.comparingInt(CCFile::getNumberOfChanges))
         .collect(Collectors.toCollection(LinkedList::new))
         .descendingIterator().forEachRemaining(x -> x.getOwner(true));
   }

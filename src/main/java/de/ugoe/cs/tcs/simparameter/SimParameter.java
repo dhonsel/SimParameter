@@ -25,7 +25,6 @@ import java.util.Date;
 public class SimParameter {
 
   public static void main(String[] args) {
-    Logger logger = (Logger) LoggerFactory.getLogger("de.ugoe.cs.tcs.simparameter.SimParameter");
     Parameter param = Parameter.getInstance();
     param.init(args);
 
@@ -36,6 +35,7 @@ public class SimParameter {
     //create output folder
     File f = new File(param.getOutputFolder());
     if (!f.exists()) {
+      //noinspection ResultOfMethodCallIgnored
       f.mkdir();
     }
 
